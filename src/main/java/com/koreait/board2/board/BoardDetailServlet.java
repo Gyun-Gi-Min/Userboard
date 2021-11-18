@@ -9,20 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/board/list")
-public class BoardListServlet extends HttpServlet {
+@WebServlet("/board/detail")
+public class BoardDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
+        String striboard = req.getParameter("iboard");
+        int iboard = Integer.parseInt(striboard);
 
 
-        List<BoardVO> list = BoardDAO.selList();
-        req.setAttribute("aa",list);
+        BoardVO vo = new BoardVO();
+        vo.setIboard(iboard);
 
+        BoardVO aa = BoardDAO.selDetail(vo);
+        req.setAttribute("aaa",aa);
 
-        MyUtils.disForward(req,res,"board/list");
+        MyUtils.disForward(req,res,"board/detail");
+
     }
 
 
