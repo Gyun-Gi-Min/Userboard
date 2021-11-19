@@ -45,6 +45,10 @@ public class BoardWriteServlet extends HttpServlet {
         vo.setCtnt(ctnt);
         vo.setWriter(loginUser.getIuser());
 
+//        int aa = BoardDAO.insBoard(vo);
+//        req.setAttribute("wri",aa);
+
+
         // TODO : 에러 예외처리 switch?
         int result = BoardDAO.insBoard(vo);
 
@@ -54,6 +58,8 @@ public class BoardWriteServlet extends HttpServlet {
                 break;
             case 0:
                 req.setAttribute("err","글 등록 실패");
+                req.setAttribute("data",vo);
+                //등록실패해도 들고있자.
                 doGet(req,res);
                 break;
         }

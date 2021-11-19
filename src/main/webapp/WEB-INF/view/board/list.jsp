@@ -1,11 +1,13 @@
 <%@ page import="com.koreait.board2.model.UserVO" %>
 <%@ page import="com.koreait.board2.model.BoardVO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="jdk.nashorn.internal.ir.RuntimeNode" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    List<BoardVO> list =(List<BoardVO>)request.getAttribute("aa");
     UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+    List<BoardVO> list =(List<BoardVO>)request.getAttribute("aa");
+    int maxPage = (int)request.getAttribute("maxPage");
 %>
 
 
@@ -16,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List</title>
 </head>
+
 <body>
 <div>
 
@@ -53,9 +56,13 @@
 
     </tr>
     <% } %>
-
 </table>
 
+<div>
+    <% for(int i=1; i<=maxPage; i++) {%>
+    <span style="margin-top:20px"><a href="/board/list?page=<%=i%>"><%=i%></a></span>&nbsp;
+    <% } %>
+</div>
 
 </body>
 </html>
